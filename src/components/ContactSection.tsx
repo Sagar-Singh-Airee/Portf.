@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { ArrowUpRight, Copy, Check, Mail, MapPin, Clock, Globe } from 'lucide-react';
+import { ArrowUpRight, Copy, Check, Mail, MapPin, Clock, Globe, Terminal } from 'lucide-react';
 
 interface ContactSectionProps {
   onOpenInquiry: () => void;
@@ -16,14 +16,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   const [copied, setCopied] = useState(false);
   const [currentTime, setCurrentTime] = useState('');
 
-  const email = 'studio@arturoquintany.com';
+  const email = 'sagar@sagarsingh.dev';
 
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      // Format time in Madrid/Milan CET
-      const timeStr = new Intl.DateTimeFormat('en-GB', {
-        timeZone: 'Europe/Madrid',
+      // Format time in San Francisco PST/PDT
+      const timeStr = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Los_Angeles',
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
@@ -44,7 +44,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   return (
     <section
       id="contact"
-      aria-label="Contact and Commissions"
+      aria-label="Contact and Technical Advisory"
       className="relative bg-[#050505] text-[#F8F7F3] pt-24 pb-20 lg:pt-32 lg:pb-28 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
@@ -53,26 +53,25 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-[#FFB52E] animate-ping" />
             <span className="text-xs font-mono text-[#FFB52E] tracking-widest uppercase">
-              STUDIO INQUIRIES & COMMISSIONS
+              TECHNICAL ADVISORY & STAFF CONSULTATIONS
             </span>
           </div>
           <span className="text-xs font-mono text-white/50 hidden sm:inline-block">
-            MADRID / MILAN / WORLDWIDE
+            SAN FRANCISCO / BENGALURU / REMOTE WORLDWIDE
           </span>
         </div>
 
         {/* Oversized Headline Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
           <div className="lg:col-span-8">
-            <h2 className="font-display font-black text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] tracking-[-0.055em] leading-[0.85] text-white select-none">
-              LET’S MAKE <br />
+            <h2 className="font-display font-black text-[clamp(3.25rem,8vw,7.5rem)] tracking-[-0.055em] leading-[0.85] text-white select-none">
+              LET’S ENGINEER <br />
               <span className="text-[#FFB52E]">SOMETHING</span> <br />
-              MEMORABLE.
+              RESILIENT.
             </h2>
 
             <p className="mt-8 text-base sm:text-xl text-white/70 max-w-xl font-light leading-relaxed">
-              Accepting selected commercial films, documentary commissions, and gallery
-              collaborations for late 2026.
+              Available for staff architecture advisory, distributed systems design, zero-allocation low latency auditing, and keynote presentations.
             </p>
           </div>
 
@@ -85,11 +84,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               onMouseLeave={onLeaveCard}
               className="w-full sm:w-auto px-8 py-5 rounded-full bg-[#FFB52E] text-[#050505] font-display font-black text-sm sm:text-base uppercase tracking-wider hover:bg-white transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer shadow-[0_10px_35px_rgba(255,181,46,0.3)] hover:scale-105"
             >
-              <span>START A PROJECT</span>
+              <span>REQUEST ADVISORY</span>
               <ArrowUpRight className="w-5 h-5" />
             </button>
             <span className="mt-3 text-[11px] font-mono text-white/40">
-              Avg. response time: within 24 hours
+              Direct response: usually within 24 hours
             </span>
           </div>
         </div>
@@ -99,7 +98,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           {/* Email Item with copy interaction */}
           <div>
             <span className="text-[11px] font-mono text-white/40 uppercase block mb-2">
-              DIRECT DISPATCH
+              PRIMARY COMMUNICATOR
             </span>
             <button
               onClick={copyEmail}
@@ -114,76 +113,76 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               )}
             </button>
             <span className="text-[10px] font-mono text-white/40 mt-1 block">
-              {copied ? 'Copied to clipboard!' : 'Click to copy direct address'}
+              {copied ? 'Copied to clipboard!' : 'Click to copy direct email'}
             </span>
           </div>
 
           {/* Location & Studios */}
           <div>
             <span className="text-[11px] font-mono text-white/40 uppercase block mb-2">
-              PHYSICAL STUDIOS
+              BASE & LAB
             </span>
             <p className="text-sm sm:text-base text-white font-medium">
-              Calle de Santa Engracia, 42
+              San Francisco, CA / Bengaluru
             </p>
             <p className="text-xs text-white/60 font-mono mt-0.5">
-              28010 Madrid, Spain
+              Available globally for on-site reviews
             </p>
           </div>
 
-          {/* Studio Clock CET */}
+          {/* Studio Clock PST */}
           <div>
             <span className="text-[11px] font-mono text-white/40 uppercase block mb-2">
-              LOCAL TIME (CET)
+              PACIFIC TIME (PT)
             </span>
             <div className="flex items-center gap-2">
               <Clock className="w-4 h-4 text-[#FFB52E]" />
               <span className="text-sm sm:text-base font-mono text-white font-bold tracking-widest">
-                {currentTime || '12:00:00'}
+                {currentTime || '12:00:00 PST'}
               </span>
             </div>
             <span className="text-[10px] font-mono text-white/40 mt-0.5 block">
-              Madrid / Milan Time Zone
+              San Francisco / UTC-8
             </span>
           </div>
 
           {/* Social Channels */}
           <div>
             <span className="text-[11px] font-mono text-white/40 uppercase block mb-2">
-              SOCIAL ARCHIVES
+              ENGINEERING REPOSITORIES
             </span>
             <div className="flex flex-wrap gap-2 text-xs font-mono">
               <a
-                href="https://instagram.com"
+                href="https://github.com"
                 target="_blank"
                 rel="noreferrer"
                 className="hover:text-[#FFB52E] transition-colors"
               >
-                [INSTAGRAM]
+                [GITHUB]
               </a>
               <a
-                href="https://youtube.com"
+                href="https://x.com"
                 target="_blank"
                 rel="noreferrer"
                 className="hover:text-[#FFB52E] transition-colors"
               >
-                [YOUTUBE]
+                [X / TWITTER]
               </a>
               <a
-                href="https://behance.net"
+                href="https://linkedin.com"
                 target="_blank"
                 rel="noreferrer"
                 className="hover:text-[#FFB52E] transition-colors"
               >
-                [BEHANCE]
+                [LINKEDIN]
               </a>
               <a
-                href="https://vimeo.com"
+                href="https://scholar.google.com"
                 target="_blank"
                 rel="noreferrer"
                 className="hover:text-[#FFB52E] transition-colors"
               >
-                [VIMEO]
+                [RESEARCH]
               </a>
             </div>
           </div>
@@ -192,3 +191,4 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     </section>
   );
 };
+

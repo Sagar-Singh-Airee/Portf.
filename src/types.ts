@@ -17,6 +17,8 @@ export interface Project {
   tags: string[];
   gallery: string[];
   featured?: boolean;
+  github?: string;
+  metrics?: { label: string; val: string }[];
 }
 
 export interface Exhibition {
@@ -30,6 +32,7 @@ export interface Exhibition {
   curator: string;
   description: string;
   ticketsRemaining: number;
+  talkType?: string;
 }
 
 export interface StatItem {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Send, CheckCircle2, ArrowRight } from 'lucide-react';
+import { X, Send, CheckCircle2, ArrowRight, Terminal } from 'lucide-react';
 
 interface ProjectInquiryModalProps {
   isOpen: boolean;
@@ -11,11 +11,10 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  const [projectType, setProjectType] = useState<string>('Creative Direction');
-  const [budget, setBudget] = useState<string>('€10k — €25k');
+  const [projectType, setProjectType] = useState<string>('Distributed Architecture');
+  const [budget, setBudget] = useState<string>('$25k — $50k');
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [timeline, setTimeline] = useState<string>('Q3/Q4 2026');
   const [message, setMessage] = useState<string>('');
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
@@ -55,7 +54,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
           <button
             onClick={onClose}
             id="inquiry-modal-close-btn"
-            aria-label="Close project inquiry modal"
+            aria-label="Close technical consultation modal"
             className="absolute top-5 right-5 p-2 rounded-full border border-[#050505]/20 text-[#050505] hover:bg-[#050505] hover:text-[#F8F7F3] transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
@@ -64,14 +63,15 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
           {!isSubmitted ? (
             <div>
               <div className="mb-6">
-                <span className="text-xs font-mono text-[#FFB52E] bg-[#050505] px-3 py-1 rounded-full inline-block mb-3">
-                  COMMISSIONS & COLLABORATIONS
+                <span className="text-xs font-mono text-[#FFB52E] bg-[#050505] px-3 py-1 rounded-full inline-flex items-center gap-1.5 mb-3">
+                  <Terminal className="w-3 h-3 text-[#FFB52E]" />
+                  <span>TECHNICAL ADVISORY & STAFF CONSULTATION</span>
                 </span>
                 <h3 className="font-display font-black text-2xl sm:text-4xl text-[#050505] tracking-tight leading-tight">
-                  Start A Project.
+                  Initiate Advisory.
                 </h3>
                 <p className="mt-2 text-xs sm:text-sm text-[#050505]/70">
-                  Direct commercial inquiries, cinematic commissions, and exhibition inquiries.
+                  Discuss high-throughput systems, zero-latency architectures, or keynote presentations with Sagar Singh.
                 </p>
               </div>
 
@@ -79,10 +79,10 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
                 {/* Project Scope Type */}
                 <div>
                   <label className="text-[11px] font-mono text-[#050505]/60 block mb-1.5">
-                    PROJECT DISCIPLINE
+                    TECHNICAL DISCIPLINE
                   </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
-                    {['Creative Direction', 'Cinematography', 'Spatial Essay', 'Editorial'].map((type) => (
+                  <div className="grid grid-cols-2 gap-1.5">
+                    {['Distributed Architecture', 'High-Throughput Backend', 'Real-Time Web & CRDT', 'Performance Audit'].map((type) => (
                       <button
                         key={type}
                         type="button"
@@ -102,10 +102,10 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
                 {/* Budget Bracket */}
                 <div>
                   <label className="text-[11px] font-mono text-[#050505]/60 block mb-1.5">
-                    ESTIMATED BUDGET BRACKET
+                    ENGAGEMENT ESTIMATE
                   </label>
                   <div className="grid grid-cols-3 gap-2">
-                    {['€5k — €10k', '€10k — €25k', '€25k+'].map((b) => (
+                    {['$10k — $25k', '$25k — $50k', '$50k+ / Retainer'].map((b) => (
                       <button
                         key={b}
                         type="button"
@@ -126,12 +126,12 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label className="text-[11px] font-mono text-[#050505]/60 block mb-1">
-                      YOUR NAME / STUDIO
+                      NAME / COMPANY
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Marcella Rossi"
+                      placeholder="e.g. Marcella Rossi (CloudScale)"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#D9D9D5] text-sm text-[#050505] focus:outline-hidden focus:border-[#050505]"
@@ -139,12 +139,12 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
                   </div>
                   <div>
                     <label className="text-[11px] font-mono text-[#050505]/60 block mb-1">
-                      EMAIL ADDRESS
+                      WORK EMAIL
                     </label>
                     <input
                       type="email"
                       required
-                      placeholder="marcella@studio.it"
+                      placeholder="marcella@company.io"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#D9D9D5] text-sm text-[#050505] focus:outline-hidden focus:border-[#050505]"
@@ -155,11 +155,11 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
                 {/* Project Brief */}
                 <div>
                   <label className="text-[11px] font-mono text-[#050505]/60 block mb-1">
-                    PROJECT SYNOPSIS & LOCATION
+                    SYSTEM OBJECTIVES & TIMELINE
                   </label>
                   <textarea
                     rows={3}
-                    placeholder="Tell us about the project goals, dates, and creative aspirations..."
+                    placeholder="Tell us about the current throughput bottlenecks, concurrency demands, or technical milestones..."
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#D9D9D5] text-sm text-[#050505] focus:outline-hidden focus:border-[#050505]"
@@ -170,7 +170,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
                   type="submit"
                   className="w-full py-3.5 rounded-full bg-[#FFB52E] text-[#050505] font-bold text-xs uppercase tracking-widest hover:bg-[#050505] hover:text-[#F8F7F3] transition-colors cursor-pointer shadow-md flex items-center justify-center gap-2"
                 >
-                  <span>Submit Inquiry</span>
+                  <span>Request Technical Discovery</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </form>
@@ -181,16 +181,16 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
                 <CheckCircle2 className="w-8 h-8" />
               </div>
               <h3 className="font-display font-black text-2xl sm:text-3xl text-[#050505]">
-                Inquiry Received
+                Consultation Scheduled
               </h3>
               <p className="text-sm text-[#050505]/70 max-w-sm mx-auto">
-                Thank you, <span className="font-semibold">{name}</span>. We review project inquiries within 24 hours. A private link and treatment deck will be delivered to <span className="font-semibold">{email}</span>.
+                Thank you, <span className="font-semibold">{name}</span>. Sagar reviews technical queries within 24 hours. A calendar link and architecture briefing document will be sent to <span className="font-semibold">{email}</span>.
               </p>
               <button
                 onClick={resetForm}
                 className="mt-4 px-6 py-2.5 rounded-full bg-[#050505] text-[#F8F7F3] text-xs font-mono uppercase tracking-wider hover:bg-[#FFB52E] hover:text-[#050505] transition-colors"
               >
-                Close
+                Done
               </button>
             </div>
           )}
@@ -199,3 +199,4 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({
     </AnimatePresence>
   );
 };
+

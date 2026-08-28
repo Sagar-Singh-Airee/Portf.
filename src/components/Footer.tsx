@@ -13,10 +13,10 @@ export const Footer: React.FC<FooterProps> = ({ onHoverLink, onLeaveLink }) => {
 
   const navLinks = [
     { label: 'Home', href: '#home' },
-    { label: 'About', href: '#about' },
-    { label: 'Portfolio', href: '#portfolio' },
-    { label: 'Exhibitions', href: '#exhibitions' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Architecture', href: '#about' },
+    { label: 'Systems', href: '#portfolio' },
+    { label: 'Keynotes', href: '#exhibitions' },
+    { label: 'Advisory', href: '#contact' },
   ];
 
   return (
@@ -25,15 +25,15 @@ export const Footer: React.FC<FooterProps> = ({ onHoverLink, onLeaveLink }) => {
       className="bg-[#F8F7F3] border-t border-[#D9D9D5] py-12 px-6 sm:px-8 lg:px-12 text-[#050505]"
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-        {/* Left: Monogram Logo (matching reference ●●❙) */}
+        {/* Left: Monogram Logo */}
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5">
             <span className="w-3.5 h-3.5 rounded-full bg-[#050505]"></span>
             <span className="w-3.5 h-3.5 rounded-full bg-[#050505]"></span>
-            <span className="w-1.5 h-3.5 rounded-xs bg-[#050505]"></span>
+            <span className="w-1.5 h-3.5 rounded-xs bg-[#FFB52E]"></span>
           </div>
           <span className="font-mono text-xs text-[#050505]/70">
-            ARTURO QUINTANY · EST. 2024
+            SAGAR SINGH · SYSTEMS ARCHITECT
           </span>
         </div>
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Calendar, MapPin, Ticket, CheckCircle, Sparkles, QrCode } from 'lucide-react';
+import { X, Calendar, MapPin, CheckCircle, Sparkles, QrCode, Terminal, ShieldCheck } from 'lucide-react';
 import { Exhibition } from '../types';
 
 interface TicketModalProps {
@@ -32,9 +32,9 @@ export const TicketModal: React.FC<TicketModalProps> = ({
   if (!exhibition) return null;
 
   const tierPrices = {
-    standard: 18,
-    vip: 45,
-    curator: 85,
+    standard: 0,
+    vip: 49,
+    curator: 120,
   };
 
   const handleBooking = (e: React.FormEvent) => {
@@ -67,7 +67,7 @@ export const TicketModal: React.FC<TicketModalProps> = ({
             <button
               onClick={onClose}
               id="ticket-modal-close-btn"
-              aria-label="Close ticket booking"
+              aria-label="Close session registration"
               className="absolute top-5 right-5 p-2 rounded-full border border-[#050505]/20 text-[#050505] hover:bg-[#050505] hover:text-[#F8F7F3] transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
@@ -78,8 +78,8 @@ export const TicketModal: React.FC<TicketModalProps> = ({
                 {/* Header */}
                 <div className="mb-6">
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#050505] text-[#FFB52E] text-xs font-mono mb-2">
-                    <Ticket className="w-3.5 h-3.5" />
-                    <span>EXHIBITION PASS · {exhibition.number}</span>
+                    <Terminal className="w-3.5 h-3.5" />
+                    <span>KEYNOTE RSVP · {exhibition.number}</span>
                   </div>
                   <h3 className="font-display font-black text-2xl sm:text-3xl text-[#050505] tracking-tight leading-tight">
                     {exhibition.title}
@@ -101,7 +101,7 @@ export const TicketModal: React.FC<TicketModalProps> = ({
                   {/* Tier Selection */}
                   <div>
                     <label className="text-xs font-mono text-[#050505]/60 block mb-2">
-                      SELECT ADMISSION TIER
+                      SELECT REGISTRATION TIER
                     </label>
                     <div className="grid grid-cols-3 gap-2">
                       <button
@@ -109,74 +109,81 @@ export const TicketModal: React.FC<TicketModalProps> = ({
                         onClick={() => setTicketTier('standard')}
                         className={`p-3 rounded-xl border text-center transition-all cursor-pointer ${
                           ticketTier === 'standard'
-                            ? 'border-[#050505] bg-[#050505] text-white'
+                            ? 'border-[#050505] bg-[#050505] text-white shadow-sm'
                             : 'border-[#D9D9D5] bg-white text-[#050505] hover:border-[#050505]'
                         }`}
                       >
                         <span className="block text-xs font-bold">Standard</span>
-                        <span className="block text-sm font-mono mt-1 text-[#FFB52E]">€18</span>
+                        <span className="block text-sm font-mono mt-1 text-[#FFB52E]">Free</span>
                       </button>
                       <button
                         type="button"
                         onClick={() => setTicketTier('vip')}
                         className={`p-3 rounded-xl border text-center transition-all cursor-pointer ${
                           ticketTier === 'vip'
-                            ? 'border-[#050505] bg-[#050505] text-white'
+                            ? 'border-[#050505] bg-[#050505] text-white shadow-sm'
                             : 'border-[#D9D9D5] bg-white text-[#050505] hover:border-[#050505]'
                         }`}
                       >
-                        <span className="block text-xs font-bold">VIP Preview</span>
-                        <span className="block text-sm font-mono mt-1 text-[#FFB52E]">€45</span>
+                        <span className="block text-xs font-bold">Lab + Slides</span>
+                        <span className="block text-sm font-mono mt-1 text-[#FFB52E]">$49</span>
                       </button>
                       <button
                         type="button"
                         onClick={() => setTicketTier('curator')}
                         className={`p-3 rounded-xl border text-center transition-all cursor-pointer ${
                           ticketTier === 'curator'
-                            ? 'border-[#050505] bg-[#050505] text-white'
+                            ? 'border-[#050505] bg-[#050505] text-white shadow-sm'
                             : 'border-[#D9D9D5] bg-white text-[#050505] hover:border-[#050505]'
                         }`}
                       >
-                        <span className="block text-xs font-bold">Curator Tour</span>
-                        <span className="block text-sm font-mono mt-1 text-[#FFB52E]">€85</span>
+                        <span className="block text-xs font-bold">VIP Deep Dive</span>
+                        <span className="block text-sm font-mono mt-1 text-[#FFB52E]">$120</span>
                       </button>
                     </div>
                   </div>
 
                   {/* Quantity */}
-                  <div className="flex items-center justify-between p-3 bg-white rounded-xl border border-[#D9D9D5]">
-                    <span className="text-xs font-mono text-[#050505]/70">NUMBER OF PASSES</span>
+                  <div className="flex items-center justify-between p-3.5 bg-white rounded-xl border border-[#D9D9D5]">
+                    <div>
+                      <span className="text-xs font-mono font-semibold block text-[#050505]">
+                        PASS QUANTITY
+                      </span>
+                      <span className="text-[11px] text-[#050505]/50 font-mono">
+                        Max 4 seats per engineering team
+                      </span>
+                    </div>
                     <div className="flex items-center gap-3">
                       <button
                         type="button"
                         onClick={() => setTicketCount(Math.max(1, ticketCount - 1))}
-                        className="w-7 h-7 rounded-full border border-[#D9D9D5] flex items-center justify-center font-mono hover:bg-[#050505] hover:text-white transition-colors"
+                        className="w-8 h-8 rounded-full border border-[#D9D9D5] flex items-center justify-center text-sm font-mono hover:bg-[#050505] hover:text-white transition-colors cursor-pointer"
                       >
                         -
                       </button>
-                      <span className="font-mono font-bold text-sm w-4 text-center">
+                      <span className="font-mono text-sm font-bold w-4 text-center">
                         {ticketCount}
                       </span>
                       <button
                         type="button"
-                        onClick={() => setTicketCount(Math.min(6, ticketCount + 1))}
-                        className="w-7 h-7 rounded-full border border-[#D9D9D5] flex items-center justify-center font-mono hover:bg-[#050505] hover:text-white transition-colors"
+                        onClick={() => setTicketCount(Math.min(4, ticketCount + 1))}
+                        className="w-8 h-8 rounded-full border border-[#D9D9D5] flex items-center justify-center text-sm font-mono hover:bg-[#050505] hover:text-white transition-colors cursor-pointer"
                       >
                         +
                       </button>
                     </div>
                   </div>
 
-                  {/* Name & Email */}
+                  {/* Attendee Details */}
                   <div className="space-y-3">
                     <div>
                       <label className="text-[11px] font-mono text-[#050505]/60 block mb-1">
-                        ATTENDEE NAME
+                        ATTENDEE FULL NAME
                       </label>
                       <input
                         type="text"
                         required
-                        placeholder="e.g. Sofia Laurent"
+                        placeholder="Alex Rivera"
                         value={attendeeName}
                         onChange={(e) => setAttendeeName(e.target.value)}
                         className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#D9D9D5] text-sm text-[#050505] focus:outline-hidden focus:border-[#050505] font-sans"
@@ -184,12 +191,12 @@ export const TicketModal: React.FC<TicketModalProps> = ({
                     </div>
                     <div>
                       <label className="text-[11px] font-mono text-[#050505]/60 block mb-1">
-                        CONFIRMATION EMAIL
+                        WORK / GITHUB EMAIL
                       </label>
                       <input
                         type="email"
                         required
-                        placeholder="sofia@gallery.com"
+                        placeholder="alex@systems.dev"
                         value={attendeeEmail}
                         onChange={(e) => setAttendeeEmail(e.target.value)}
                         className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#D9D9D5] text-sm text-[#050505] focus:outline-hidden focus:border-[#050505] font-sans"
@@ -203,68 +210,74 @@ export const TicketModal: React.FC<TicketModalProps> = ({
                       type="submit"
                       className="w-full py-3.5 px-6 rounded-full bg-[#FFB52E] text-[#050505] font-bold text-xs uppercase tracking-widest hover:bg-[#050505] hover:text-[#F8F7F3] transition-colors cursor-pointer shadow-md flex items-center justify-center gap-2"
                     >
-                      Confirm Reservation · Total €{tierPrices[ticketTier] * ticketCount}
+                      Confirm RSVP · Total ${tierPrices[ticketTier] * ticketCount}
                     </button>
                   </div>
                 </form>
               </div>
             ) : (
-              /* Success Digital Pass View */
+              /* Success Digital Pass View with Holographic Foil */
               <div className="text-center py-4 space-y-5">
-                <div className="w-12 h-12 rounded-full bg-[#FFB52E] text-[#050505] flex items-center justify-center mx-auto shadow-md">
+                <div className="w-12 h-12 rounded-full bg-[#FFB52E] text-[#050505] flex items-center justify-center mx-auto shadow-md animate-bounce">
                   <CheckCircle className="w-6 h-6" />
                 </div>
 
                 <div>
                   <span className="text-xs font-mono text-[#050505]/60 uppercase tracking-widest">
-                    PASS CONFIRMED
+                    SESSION PASS ISSUED & VERIFIED
                   </span>
                   <h3 className="font-display font-black text-2xl text-[#050505] mt-1">
                     See you in {exhibition.location.split(',')[0]}
                   </h3>
                   <p className="text-xs text-[#050505]/70 mt-1">
-                    An official digital pass has been issued to <span className="font-semibold">{attendeeEmail}</span>.
+                    Your verified badge and calendar invite were sent to <span className="font-semibold">{attendeeEmail}</span>.
                   </p>
                 </div>
 
-                {/* Digital Ticket Card Preview */}
-                <div className="p-5 rounded-2xl bg-[#050505] text-[#F8F7F3] border border-white/10 text-left relative overflow-hidden">
-                  <div className="flex justify-between items-start">
+                {/* Digital Ticket Card Preview with Holographic Foil effect */}
+                <div className="p-6 rounded-2xl bg-[#050505] text-[#F8F7F3] border border-white/15 text-left relative overflow-hidden shadow-2xl">
+                  {/* Holographic light gradient sheen */}
+                  <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/15 to-transparent rotate-45 pointer-events-none animate-shimmer" />
+
+                  <div className="flex justify-between items-start relative z-10">
                     <div>
-                      <span className="text-[10px] font-mono text-[#FFB52E]">ADMISSION PASS</span>
-                      <h4 className="font-display font-bold text-lg text-white mt-0.5">
+                      <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#FFB52E]">
+                        <ShieldCheck className="w-3.5 h-3.5" />
+                        <span>CRYPTOGRAPHIC PASS #CONF-2026</span>
+                      </div>
+                      <h4 className="font-display font-bold text-lg text-white mt-1">
                         {exhibition.title}
                       </h4>
                       <p className="text-xs text-white/70 font-mono mt-1">
                         {exhibition.venue}
                       </p>
                     </div>
-                    <div className="p-2 rounded-lg bg-white text-[#050505]">
+                    <div className="p-2 rounded-xl bg-white text-[#050505] shadow-md">
                       <QrCode className="w-8 h-8" />
                     </div>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-white/15 flex justify-between text-[11px] font-mono">
+                  <div className="mt-5 pt-4 border-t border-white/15 flex justify-between text-[11px] font-mono relative z-10">
                     <div>
-                      <span className="text-white/40 block">HOLDER</span>
+                      <span className="text-white/40 block">KEYNOTE SPEAKER</span>
+                      <span className="text-white font-semibold">Sagar Singh</span>
+                    </div>
+                    <div>
+                      <span className="text-white/40 block">DELEGATE</span>
                       <span className="text-white font-semibold">{attendeeName}</span>
                     </div>
                     <div>
-                      <span className="text-white/40 block">DATE</span>
-                      <span className="text-white">{exhibition.date}</span>
-                    </div>
-                    <div>
-                      <span className="text-white/40 block">PASSES</span>
-                      <span className="text-[#FFB52E]">{ticketCount}x {ticketTier.toUpperCase()}</span>
+                      <span className="text-white/40 block">SEATS</span>
+                      <span className="text-[#FFB52E] font-bold">{ticketCount} ({ticketTier.toUpperCase()})</span>
                     </div>
                   </div>
                 </div>
 
                 <button
                   onClick={onClose}
-                  className="w-full py-3 rounded-full bg-[#050505] text-white text-xs font-mono uppercase tracking-widest hover:bg-[#FFB52E] hover:text-[#050505] transition-colors"
+                  className="w-full py-3 rounded-full bg-[#050505] text-white text-xs font-mono uppercase tracking-widest hover:bg-[#FFB52E] hover:text-[#050505] transition-colors cursor-pointer font-bold"
                 >
-                  Done
+                  Close & Return
                 </button>
               </div>
             )}

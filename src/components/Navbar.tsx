@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, ArrowUpRight, Volume2, VolumeX, Sparkles } from 'lucide-react';
-import heroImg from '../assets/images/hero_creator_camera_1787888211482.jpg';
+import { Menu, X, ArrowUpRight, Volume2, VolumeX, Sparkles, Code2 } from 'lucide-react';
+import { HERO_ASSETS } from '../data/portfolioData';
 
 interface NavbarProps {
   onOpenInquiry: () => void;
@@ -28,7 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Ambient sound synthesizer (subtle warm analog film hum)
+  // Ambient sound synthesizer (subtle minimalist low-pass synthesizer)
   const toggleAmbientSound = () => {
     if (!ambientSoundActive) {
       try {
@@ -44,7 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         filter.frequency.setValueAtTime(320, ctx.currentTime);
 
         gain.gain.setValueAtTime(0.001, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.04, ctx.currentTime + 1.5);
+        gain.gain.exponentialRampToValueAtTime(0.035, ctx.currentTime + 1.5);
 
         osc.connect(filter);
         filter.connect(gain);
@@ -75,8 +75,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   const navLinks = [
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#about' },
-    { label: 'Portfolio', href: '#portfolio' },
-    { label: 'Exhibitions', href: '#exhibitions' },
+    { label: 'Systems', href: '#portfolio' },
+    { label: 'Keynotes', href: '#exhibitions' },
     { label: 'Contact', href: '#contact' },
   ];
 
@@ -91,11 +91,11 @@ export const Navbar: React.FC<NavbarProps> = ({
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between">
-          {/* Left: Minimal Monogram Logo (matching reference ●●❙) */}
+          {/* Left: Minimal Monogram Logo */}
           <a
             href="#home"
             id="nav-logo"
-            aria-label="Arturo Quintany Portfolio Home"
+            aria-label="Sagar Singh Portfolio Home"
             className="flex items-center gap-2 group cursor-pointer"
             onMouseEnter={onHoverLink}
             onMouseLeave={onLeaveLink}
@@ -105,7 +105,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="w-4 h-4 rounded-full bg-[#050505] transition-colors group-hover:bg-[#FFB52E]"></span>
               <span className="w-1.5 h-4 rounded-xs bg-[#050505]"></span>
             </div>
-            <span className="sr-only">Arturo Quintany — Visual Storyteller</span>
+            <span className="sr-only">Sagar Singh — Software Engineer</span>
           </a>
 
           {/* Center: Desktop Navigation with subtle slashes */}
@@ -129,30 +129,30 @@ export const Navbar: React.FC<NavbarProps> = ({
             ))}
           </nav>
 
-          {/* Right: Date / Exhibition Badge & Actions */}
+          {/* Right: Keynote Badge & Actions */}
           <div className="flex items-center gap-4">
             {/* Audio Atmosphere button */}
             <button
               onClick={toggleAmbientSound}
               id="nav-audio-toggle"
-              aria-label="Toggle ambient analog soundscape"
+              aria-label="Toggle ambient atmospheric audio"
               className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-[#D9D9D5] text-[11px] text-[#050505]/70 hover:text-[#050505] hover:border-[#050505] transition-colors"
-              title="Ambient Analog Soundscape"
+              title="Ambient Focus Drone"
             >
               {ambientSoundActive ? (
                 <>
                   <Volume2 className="w-3.5 h-3.5 text-[#FFB52E] animate-pulse" />
-                  <span className="font-mono text-[10px]">SOUND: ON</span>
+                  <span className="font-mono text-[10px]">FOCUS: ON</span>
                 </>
               ) : (
                 <>
                   <VolumeX className="w-3.5 h-3.5 text-[#050505]/50" />
-                  <span className="font-mono text-[10px]">SOUND: OFF</span>
+                  <span className="font-mono text-[10px]">FOCUS: OFF</span>
                 </>
               )}
             </button>
 
-            {/* Reference exact right-badge: ✦ Sala Canal, 22 Nov 26 + circular avatar thumbnail */}
+            {/* Reference exact right-badge: ✦ KubeCon Keynote, 24 Oct 26 + avatar */}
             <a
               href="#exhibitions"
               id="nav-status-badge"
@@ -162,13 +162,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <div className="flex items-center gap-1 text-[11px] font-medium tracking-tight text-[#050505]">
                 <Sparkles className="w-3 h-3 text-[#FFB52E]" />
-                <span className="text-[#050505]/70">Sala Canal,</span>
-                <span className="font-semibold">22 Nov 26</span>
+                <span className="text-[#050505]/70">KubeCon Keynote,</span>
+                <span className="font-semibold">24 Oct 26</span>
               </div>
               <div className="w-6 h-6 rounded-full overflow-hidden border border-[#FFB52E]/60">
                 <img
-                  src={heroImg}
-                  alt="Creator avatar"
+                  src={HERO_ASSETS.heroCreator}
+                  alt="Sagar Singh avatar"
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
                 />
               </div>
@@ -239,10 +239,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }}
                 className="w-full py-3.5 bg-[#FFB52E] text-[#050505] font-bold text-xs uppercase tracking-widest rounded-full flex items-center justify-center gap-2"
               >
-                Start A Project <ArrowUpRight className="w-4 h-4" />
+                Schedule Architecture Consultation <ArrowUpRight className="w-4 h-4" />
               </button>
               <div className="flex justify-between items-center text-[11px] text-white/50 font-mono">
-                <span>MADRID & MILAN</span>
+                <span>BANGALORE & SAN FRANCISCO</span>
                 <span>AVAILABLE 2026</span>
               </div>
             </div>
@@ -252,3 +252,4 @@ export const Navbar: React.FC<NavbarProps> = ({
     </>
   );
 };
+

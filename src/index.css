@@ -3,6 +3,7 @@
 @theme {
   --font-display: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-script: 'Caveat', cursive;
   --font-serif: 'Instrument Serif', Georgia, serif;
   
@@ -19,10 +20,16 @@ body {
   background-color: #F8F7F3;
   color: #050505;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, .font-display {
   font-family: var(--font-display);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
 }
 
 .font-script {
@@ -32,6 +39,31 @@ h1, h2, h3, .font-display {
 .font-serif-italic {
   font-family: var(--font-serif);
   font-style: italic;
+}
+
+/* Fluid Typographic Scale Helpers */
+.type-hero {
+  font-size: clamp(3.25rem, 9.8vw, 8.5rem);
+  line-height: 0.84;
+  letter-spacing: -0.065em;
+}
+
+.type-marquee {
+  font-size: clamp(3rem, 7.8vw, 8.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+}
+
+.type-section-title {
+  font-size: clamp(3rem, 11.5vw, 10rem);
+  line-height: 0.82;
+  letter-spacing: -0.07em;
+}
+
+.type-outro {
+  font-size: clamp(3.25rem, 15.5vw, 13.5rem);
+  line-height: 0.72;
+  letter-spacing: -0.075em;
 }
 
 @keyframes marquee {
@@ -60,6 +92,42 @@ h1, h2, h3, .font-display {
   animation: marquee-reverse 32s linear infinite;
 }
 
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes spin-very-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-7px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 16s linear infinite;
+}
+
+.animate-spin-very-slow {
+  animation: spin-very-slow 48s linear infinite;
+}
+
+.animate-float {
+  animation: float-slow 4.5s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 5px;
@@ -71,4 +139,5 @@ h1, h2, h3, .font-display {
   background: #050505;
   border-radius: 3px;
 }
+
 
