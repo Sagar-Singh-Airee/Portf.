@@ -1,0 +1,6 @@
+{
+  "name": "Visual Poetry — Creative Editorial Portfolio",
+  "description": "A modern editorial design publication and high-end creative portfolio featuring oversized typography, asymmetric image compositions, and cinematic visual storytelling.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
